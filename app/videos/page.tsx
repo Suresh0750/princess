@@ -13,12 +13,32 @@ import HeartCursor from '../components/HeartCursor';
 
 const videos = [
   {
+    id: 1,
+    title: '24 💖',
+    src: '/videos/24.mp4',
+  },
+  {
+    id: 2,
+    title: 'VVS 💕',
+    src: '/videos/vvs.mp4',
+  },
+  {
     id: 3,
+    title: 'Kushi 🎬💖',
+    src: '/videos/Kushi.mp4',
+  },
+  {
+    id: 4,
+    title: 'Jayam 💖',
+    src: '/videos/Jayam.mp4',
+  },
+  {
+    id: 5,
     title: 'Kuttty Movie 🎬💖',
     src: '/videos/KutttyMovie.mp4',
   },
   {
-    id: 4,
+    id: 6,
     title: 'Mama & Beautiful Daughter 💕',
     src: '/videos/Mama_beautiful_daughter.mp4',
   },
