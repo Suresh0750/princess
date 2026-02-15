@@ -1,46 +1,23 @@
 'use client';
 
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import DateGuard from '../components/DateGuard';
 import FloatingHearts from '../components/FloatingHearts';
 import HeartCursor from '../components/HeartCursor';
 
-const memories = [
-  {
-    emoji: '💘',
-    title: 'First Meet Day',
-    description: 'The day our eyes met and my heart skipped a beat 💖',
-    date: 'That Special Day'
-  },
-  {
-    emoji: '🌸',
-    title: 'First Chat',
-    description: 'Our first conversation that changed everything 🌹',
-    date: 'The Beginning'
-  },
-  {
-    emoji: '🎁',
-    title: 'First Gift',
-    description: 'The first gift I gave you, wrapped with all my love 💝',
-    date: 'A Special Moment'
-  },
-  {
-    emoji: '🌙',
-    title: 'First Trip',
-    description: 'Our first adventure together, creating beautiful memories ✨',
-    date: 'An Unforgettable Journey'
-  },
-  {
-    emoji: '💍',
-    title: 'The Proposal',
-    description: 'The moment I asked you to be mine forever 💞',
-    date: 'Today'
-  },
-];
-
 export default function MemoriesPage() {
   const router = useRouter();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const handlePlayClick = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
 
   return (
     <DateGuard>
@@ -48,7 +25,7 @@ export default function MemoriesPage() {
       <FloatingHearts />
       
       <div className="min-h-screen bg-gradient-to-br from-pink-200 via-pink-100 to-pink-300 p-4 md:p-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="text-center mb-8 md:mb-12">
             <button
@@ -58,53 +35,61 @@ export default function MemoriesPage() {
               ← Back
             </button>
             <h1 className="text-4xl md:text-6xl font-dancing text-pink-600 mb-4">
-              Our Memories 🌙💖
+              Describe Her 🌙💖
             </h1>
           </div>
 
-          {/* Timeline */}
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-pink-300 transform md:-translate-x-1/2"></div>
+          {/* Video Container */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative bg-white rounded-2xl p-4 md:p-6 shadow-2xl"
+          >
+            <div className="relative bg-black rounded-lg overflow-hidden">
+              <video
+                ref={videoRef}
+                src="/videos/describe.mp4"
+                controls={isPlaying}
+                className="w-full h-auto max-h-[70vh]"
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
+                onError={(e) => {
+                  console.error('Video playback error');
+                  const target = e.target as HTMLVideoElement;
+                  target.style.display = 'none';
+                }}
+              >
+                Your browser does not support the video tag.
+              </video>
 
-            {/* Memory Items */}
-            <div className="space-y-8">
-              {memories.map((memory, index) => (
+              {/* Play button overlay (shown when video is not playing) */}
+              {!isPlaying && (
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                  className={`relative flex items-center ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute inset-0 flex items-center justify-center bg-black/40"
                 >
-                  {/* Timeline Dot */}
-                  <div className="absolute left-6 md:left-1/2 w-6 h-6 bg-[#E8B4B8] rounded-full border-4 border-white shadow-lg transform md:-translate-x-1/2 z-10"></div>
-
-                  {/* Memory Card */}
-                  <div
-                    className={`ml-20 md:ml-0 md:w-5/12 ${
-                      index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'
-                    }`}
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handlePlayClick}
+                    className="bg-white/90 rounded-full p-6 md:p-8 hover:bg-white transition-colors cursor-pointer"
+                    aria-label="Play video"
                   >
-                    <div className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-shadow">
-                      <div className="text-4xl mb-3">{memory.emoji}</div>
-                      <h3 className="text-2xl font-dancing text-pink-600 mb-2">
-                        {memory.title}
-                      </h3>
-                      <p className="text-pink-700 font-poppins mb-2">
-                        {memory.description}
-                      </p>
-                      <p className="text-sm text-pink-500 font-poppins italic">
-                        {memory.date}
-                      </p>
-                    </div>
-                  </div>
+                    <svg
+                      className="w-16 h-16 md:w-20 md:h-20 text-pink-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </motion.button>
                 </motion.div>
-              ))}
+              )}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </DateGuard>
