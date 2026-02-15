@@ -2,17 +2,52 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import DateGuard from '../components/DateGuard';
 import FloatingHearts from '../components/FloatingHearts';
 import HeartCursor from '../components/HeartCursor';
 
-// Dummy romantic images (using placeholder images)
-const images = Array.from({ length: 12 }, (_, i) => ({
-  id: i + 1,
-  url: `https://picsum.photos/400/400?random=${i + 1}`,
-  title: `Romantic Memory ${i + 1} 💖`,
-}));
+// Local romantic images from the images folder
+import WhatsAppImg113602 from './WhatsApp Image 2026-02-12 at 11.36.02 PM.jpeg';
+import WhatsAppImg113602_1 from './WhatsApp Image 2026-02-12 at 11.36.02 PM (1).jpeg';
+import WhatsAppImg113601 from './WhatsApp Image 2026-02-12 at 11.36.01 PM.jpeg';
+import WhatsAppImg113601_1 from './WhatsApp Image 2026-02-12 at 11.36.01 PM (1).jpeg';
+import MImage from './M_Image.png';
+import MeWithHerSaree from './Me_With_Her_Saree.png';
+
+const images = [
+  {
+    id: 1,
+    src: WhatsAppImg113602,
+    title: 'WhatsApp Memory 11:36:02 PM',
+  },
+  {
+    id: 2,
+    src: WhatsAppImg113602_1,
+    title: 'WhatsApp Memory 11:36:02 PM (1)',
+  },
+  {
+    id: 3,
+    src: WhatsAppImg113601,
+    title: 'WhatsApp Memory 11:36:01 PM',
+  },
+  {
+    id: 4,
+    src: WhatsAppImg113601_1,
+    title: 'WhatsApp Memory 11:36:01 PM (1)',
+  },
+  {
+    id: 5,
+    src: MImage,
+    title: 'M Image',
+  },
+  {
+    id: 6,
+    src: MeWithHerSaree,
+    title: 'Me With Her Saree',
+  },
+];
 
 export default function ImagesPage() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -34,7 +69,8 @@ export default function ImagesPage() {
               ← Back
             </button>
             <h1 className="text-4xl md:text-6xl font-dancing text-pink-600 mb-4">
-              Our Beautiful Memories 📸💖
+               Beautiful Memories Images 📸💖
+               
             </h1>
           </div>
 
@@ -50,9 +86,11 @@ export default function ImagesPage() {
                 onClick={() => setSelectedImage(index)}
                 className="relative cursor-pointer rounded-xl overflow-hidden shadow-lg group"
               >
-                <img
-                  src={image.url}
+                <Image
+                  src={image.src}
                   alt={image.title}
+                  width={400}
+                  height={400}
                   className="w-full h-48 md:h-64 object-cover"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all flex items-center justify-center">
@@ -90,8 +128,8 @@ export default function ImagesPage() {
                 </button>
                 
                 <div className="relative">
-                  <img
-                    src={images[selectedImage].url}
+                  <Image
+                    src={images[selectedImage].src}
                     alt={images[selectedImage].title}
                     className="w-full h-auto rounded-lg"
                   />

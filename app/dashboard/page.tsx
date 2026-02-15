@@ -12,7 +12,7 @@ const cards = [
   { emoji: '📸', title: 'Images', path: '/images', color: 'from-pink-400 to-[#E8B4B8]' },
   { emoji: '🎥', title: 'Videos', path: '/videos', color: 'from-[#E8B4B8] to-pink-400' },
   { emoji: '💌', title: 'Letters', path: '/letters', color: 'from-pink-300 to-[#E8B4B8]' },
-  { emoji: '🌙', title: 'Our Memories', path: '/memories', color: 'from-[#E8B4B8] to-pink-300' },
+  { emoji: '🌙', title: 'Describe Her', path: '/memories', color: 'from-[#E8B4B8] to-pink-300' },
   { emoji: '💬', title: 'Chat', path: '/chat', color: 'from-pink-400 to-pink-500' },
 ];
 

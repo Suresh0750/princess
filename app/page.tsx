@@ -93,7 +93,7 @@ export default function ProposalPage() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleYesClick}
-                  className="bg-[#E8B4B8] hover:bg-[#FF69B4] text-white text-3xl font-dancing px-12 py-6 rounded-full shadow-xl pulse-animation"
+                  className="bg-[#E8B4B8] hover:bg-[#FF69B4] text-white text-3xl font-dancing px-12 py-6 rounded-full shadow-xl pulse-animation cursor-pointer"
                 >
                   YES ❤️
                 </motion.button>
@@ -107,12 +107,12 @@ export default function ProposalPage() {
                   onMouseEnter={handleNoHover}
                   onTouchStart={handleNoHover}
                   onClick={handleNoClick}
-                  className="bg-gray-300 hover:bg-gray-400 text-gray-700 text-3xl font-dancing px-12 py-6 rounded-full shadow-xl"
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-700 text-3xl font-dancing px-12 py-6 rounded-full shadow-xl "
                   style={{ 
                     position: 'absolute',
                     left: 0,
                     top: 0,
-                  }}
+                  }}  
                 >
                   NO 💔😿 
                 </motion.button>

@@ -10,7 +10,8 @@ export default function MusicPlayer() {
   useEffect(() => {
     // Create audio element with a romantic song URL
     // Using a free romantic music URL (you can replace with your own)
-    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    // https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3
+    const audio = new Audio('');
     audio.loop = true;
     audio.volume = 0.3;
     audioRef.current = audio;

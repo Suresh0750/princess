@@ -94,7 +94,7 @@ export default function VoicePassword({ onSuccess, expectedPhrase = 'I love you'
           onClick={startListening}
           disabled={isListening}
           className={`bg-[#E8B4B8] hover:bg-[#FF69B4] text-white rounded-full p-6 text-4xl transition-all ${
-            isListening ? 'pulse-animation' : ''
+            isListening ? 'pulse-animation' : 'cursor-pointer'
           } disabled:opacity-50`}
         >
           {isListening ? '🎙️' : '🎤'}

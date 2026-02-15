@@ -1,17 +1,27 @@
 'use client';
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import DateGuard from '../components/DateGuard';
 import FloatingHearts from '../components/FloatingHearts';
 import HeartCursor from '../components/HeartCursor';
 
-const videos = Array.from({ length: 6 }, (_, i) => ({
-  id: i + 1,
-  title: `Romantic Video ${i + 1} 🎥💖`,
-  thumbnail: `https://picsum.photos/400/300?random=${i + 10}`,
-}));
+// For best results, place your video files in `public/videos`
+// and reference them with paths like `/videos/YourVideo.mp4`.
+// You don't need to import the files.
+
+const videos = [
+  {
+    id: 3,
+    title: 'Kuttty Movie 🎬💖',
+    src: '/videos/KutttyMovie.mp4',
+  },
+  {
+    id: 4,
+    title: 'Mama & Beautiful Daughter 💕',
+    src: '/videos/Mama_beautiful_daughter.mp4',
+  },
+];
 
 export default function VideosPage() {
   const router = useRouter();
@@ -47,19 +57,12 @@ export default function VideosPage() {
                 whileHover={{ scale: 1.05 }}
                 className="relative cursor-pointer rounded-xl overflow-hidden shadow-xl group"
               >
-                <div className="relative">
-                  <img
-                    src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-48 md:h-64 object-cover"
+                <div className="bg-white p-2 pt-3 flex flex-col items-center">
+                  <video
+                    src={video.src as string}
+                    controls
+                    className="w-full h-48 md:h-64 object-cover rounded-lg shadow-md"
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all flex items-center justify-center">
-                    <div className="text-6xl opacity-0 group-hover:opacity-100 transition-opacity">
-                      ▶️
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white p-4">
                   <h3 className="text-xl font-dancing text-pink-600 text-center">
                     {video.title}
                   </h3>
@@ -68,9 +71,8 @@ export default function VideosPage() {
             ))}
           </div>
 
-          <div className="text-center mt-12 text-pink-500 font-poppins">
-            <p>💖 Replace these with your actual romantic videos! 💖</p>
-          </div>
+          {/* You can keep adding more videos by importing files at the top and
+              adding new objects to the videos array. */}
         </div>
       </div>
     </DateGuard>
