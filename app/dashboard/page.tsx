@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import DateGuard from '../components/DateGuard';
 import FloatingHearts from '../components/FloatingHearts';
 import HeartCursor from '../components/HeartCursor';
-import MusicPlayer from '../components/MusicPlayer';
 
 const cards = [
   { emoji: '📸', title: 'Images', path: '/images', color: 'from-pink-400 to-[#E8B4B8]' },
@@ -22,16 +21,6 @@ export default function Dashboard() {
   const [starryMode, setStarryMode] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    // Auto-play music on dashboard load
-    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-    audio.loop = true;
-    audio.volume = 0.3;
-    audio.play().catch(() => {
-      // Handle autoplay restrictions
-    });
-  }, []);
-
   const handleHeartClick = () => {
     const newCount = heartClicks + 1;
     setHeartClicks(newCount);
@@ -45,7 +34,6 @@ export default function Dashboard() {
     <DateGuard>
       <HeartCursor />
       <FloatingHearts />
-      <MusicPlayer />
       
       <div className={`min-h-screen p-4 md:p-8 ${starryMode ? 'starry-night' : 'bg-gradient-to-br from-pink-200 via-pink-100 to-pink-300'}`}>
         <div className="max-w-6xl mx-auto">
