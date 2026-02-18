@@ -15,7 +15,6 @@ export default function DateGuard({ children }: { children: React.ReactNode }) {
     const checkDate = () => {
       try {
         // Use real-world time API
-
         const today = new Date();
         const expiryDate = new Date("2026-02-17");
         if (today < expiryDate) {
